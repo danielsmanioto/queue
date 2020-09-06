@@ -16,13 +16,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-	@Value("${javainuse.rabbitmq.queue}")
+	@Value("${dsmanioto.rabbitmq.queue}")
 	private String queueName;
 
-	@Value("${javainuse.rabbitmq.exchange}")
+	@Value("${dsmanioto.rabbitmq.exchange}")
 	private String exchange;
 
-	@Value("${javainuse.rabbitmq.routingkey}")
+	@Value("${dsmanioto.rabbitmq.routingkey}")
 	private String routingkey;
 
 	@Bean
@@ -46,7 +46,7 @@ public class RabbitMQConfig {
 	}
 
 	public AmqpTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-		final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+		RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
 		rabbitTemplate.setMessageConverter(jsonMessageConverter());
 		return rabbitTemplate;
 	}

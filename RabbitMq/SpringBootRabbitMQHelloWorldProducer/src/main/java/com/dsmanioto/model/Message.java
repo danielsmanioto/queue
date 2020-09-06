@@ -18,4 +18,12 @@ public class Message {
     public String getMessage() {
         return message;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "sender='" + sender + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
