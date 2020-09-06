@@ -51,4 +51,11 @@ public class RabbitMQConfig {
 		return rabbitTemplate;
 	}
 
+	public String getExchange() {
+		return exchange;
+	}
+
+	public String getRoutingkey() {
+		return routingkey;
+	}
 }

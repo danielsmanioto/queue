@@ -1,18 +1,22 @@
 package com.dsmanioto.controller;
 
 import com.dsmanioto.model.Message;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.dsmanioto.service.RabbitMQSender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.text.MessageFormat;
 
 @RestController
 @RequestMapping(value = "/rabbit-mq")
 public class RabbitMQWebController {
 
-	private Logger logger = LogManager.getLogger(RabbitMQWebController.class);
+	private static final Logger logger = LoggerFactory.getLogger(RabbitMQWebController.class);
 
 	@Autowired
 	private RabbitMQSender rabbitMQSender;
@@ -21,11 +25,9 @@ public class RabbitMQWebController {
 	public String producer(@RequestParam("sender") String sender,
 						   @RequestParam("message") String message) {
 
-		logger.info("Sending message");
-
 		rabbitMQSender.send(new Message(sender, message));
 
-		return "Message sent to the RabbitMQ JavaInUse Successfully";
+		return MessageFormat.format("Message {0} sent to the RabbitMQ JavaInUse Successfully", message);
 	}
 
 }
